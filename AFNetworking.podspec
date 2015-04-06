@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
     ss.dependency 'AFNetworking/Reachability'
     ss.dependency 'AFNetworking/Security'
 
-    ss.source_files = 'AFNetworking/AFURLSessionManager.{h,m}', 'AFNetworking/AFHTTPSessionManager.{h,m}'
+    ss.source_files = 'AFNetworking/AFURLSessionManager.{h,m}', 'AFNetworking/AFHTTPSessionManager.{h,m}', 'AFRequestAuthenticator.{h,m}'
   end
 
   s.subspec 'UIKit' do |ss|
