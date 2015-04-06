@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
     ss.dependency 'AFNetworking/Reachability'
     ss.dependency 'AFNetworking/Security'
 
-    ss.source_files = 'AFNetworking/AFURLConnectionOperation.{h,m}', 'AFNetworking/AFHTTPRequestOperation.{h,m}', 'AFNetworking/AFHTTPRequestOperationManager.{h,m}'
+    ss.source_files = 'AFNetworking/AFURLConnectionOperation.{h,m}', 'AFNetworking/AFHTTPRequestOperation.{h,m}', 'AFNetworking/AFHTTPRequestOperationManager.{h,m}', 'AFNetworking/AFURLRequestAuthenticator.{h,m}'
   end
 
   s.subspec 'NSURLSession' do |ss|
@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
     ss.dependency 'AFNetworking/Reachability'
     ss.dependency 'AFNetworking/Security'
 
-    ss.source_files = 'AFNetworking/AFURLSessionManager.{h,m}', 'AFNetworking/AFHTTPSessionManager.{h,m}', 'AFNetworking/AFRequestAuthenticator.{h,m}'
+    ss.source_files = 'AFNetworking/AFURLSessionManager.{h,m}', 'AFNetworking/AFHTTPSessionManager.{h,m}'
   end
 
   s.subspec 'UIKit' do |ss|

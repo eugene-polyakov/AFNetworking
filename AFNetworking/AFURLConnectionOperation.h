@@ -124,7 +124,7 @@
  */
 @property (readonly, nonatomic, strong) NSError *error;
 
-@property (nonatomic, strong) AFRequestAuthenticator * requestAuthenticator;
+@property (nonatomic, strong) AFURLRequestAuthenticator * requestAuthenticator;
 
 ///----------------------------
 /// @name Getting Response Data

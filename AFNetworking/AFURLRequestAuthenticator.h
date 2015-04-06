@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AFRequestAuthenticator : NSObject
+@interface AFURLRequestAuthenticator : NSObject
 
 -(void)authenticateRequest:(NSMutableURLRequest*)request;
 

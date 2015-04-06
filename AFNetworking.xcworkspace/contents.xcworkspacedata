@@ -11,10 +11,10 @@
          location = "container:Auth"
          name = "Auth">
          <FileRef
-            location = "group:../AFNetworking/AFRequestAuthenticator.h">
+            location = "group:../AFNetworking/AFURLRequestAuthenticator.h">
          </FileRef>
          <FileRef
-            location = "group:../AFNetworking/AFRequestAuthenticator.m">
+            location = "group:../AFNetworking/AFURLRequestAuthenticator.m">
          </FileRef>
       </Group>
       <Group

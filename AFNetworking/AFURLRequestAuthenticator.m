@@ -6,9 +6,9 @@
 //
 //
 
-#import "AFRequestAuthenticator.h"
+#import "AFURLRequestAuthenticator.h"
 
-@implementation AFRequestAuthenticator
+@implementation AFURLRequestAuthenticator
 
 -(void)authenticateRequest:(NSMutableURLRequest*)request {
     // do nothing
