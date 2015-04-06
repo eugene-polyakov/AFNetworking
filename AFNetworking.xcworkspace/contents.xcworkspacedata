@@ -8,6 +8,16 @@
          location = "group:AFNetworking.h">
       </FileRef>
       <Group
+         location = "container:Auth"
+         name = "Auth">
+         <FileRef
+            location = "group:../AFNetworking/AFRequestAuthenticator.h">
+         </FileRef>
+         <FileRef
+            location = "group:../AFNetworking/AFRequestAuthenticator.m">
+         </FileRef>
+      </Group>
+      <Group
          location = "container:"
          name = "NSURLConnection">
          <FileRef
