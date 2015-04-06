@@ -457,7 +457,9 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
     [self.lock lock];
     if (![self isCancelled]) {
         if (self.requestAuthenticator) {
-            self.requestAuthenticator.authenticateRequest(self.request)
+            NSMutableURLRequest * req = self.request.mutableCopy;
+            [self.requestAuthenticator authenticateRequest:req];
+            self.request = req;
         }
         self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];
 

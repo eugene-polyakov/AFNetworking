@@ -25,6 +25,7 @@
 #import <Availability.h>
 #import "AFURLRequestSerialization.h"
 #import "AFURLResponseSerialization.h"
+#import "AFURLRequestAuthenticator.h"
 #import "AFSecurityPolicy.h"
 
 #ifndef NS_DESIGNATED_INITIALIZER

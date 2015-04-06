@@ -5,18 +5,14 @@
       location = "group:AFNetworking"
       name = "AFNetworking">
       <FileRef
+         location = "group:AFURLRequestAuthenticator.h">
+      </FileRef>
+      <FileRef
+         location = "group:AFURLRequestAuthenticator.m">
+      </FileRef>
+      <FileRef
          location = "group:AFNetworking.h">
       </FileRef>
-      <Group
-         location = "container:Auth"
-         name = "Auth">
-         <FileRef
-            location = "group:../AFNetworking/AFURLRequestAuthenticator.h">
-         </FileRef>
-         <FileRef
-            location = "group:../AFNetworking/AFURLRequestAuthenticator.m">
-         </FileRef>
-      </Group>
       <Group
          location = "container:"
          name = "NSURLConnection">
