@@ -1,6 +1,6 @@
 //
 //  AFAuthenticator.h
-//  
+//
 //
 //  Created by E on 4/6/15.
 //
@@ -11,5 +11,7 @@
 @interface AFURLRequestAuthenticator : NSObject
 
 -(void)authenticateRequest:(NSMutableURLRequest*)request;
+
+-(dispatch_group_t)authenticatorGroup;
 
 @end
