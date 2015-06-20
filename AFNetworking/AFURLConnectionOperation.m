@@ -478,6 +478,7 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
                 NSError * error = [[NSError alloc] initWithDomain:@"Auth" code:-111 userInfo:@{NSLocalizedDescriptionKey: @"Authentication cancelled"}];
                 [self.connection cancel];
                 [self performSelector:@selector(connection:didFailWithError:) withObject:self.connection withObject:error];
+                [self.lock unlock];
                 return;
             }
         }
