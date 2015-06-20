@@ -10,7 +10,7 @@
 
 @interface AFURLRequestAuthenticator : NSObject
 
--(void)authenticateRequest:(NSMutableURLRequest*)request;
+-(BOOL)authenticateRequest:(NSMutableURLRequest*)request;
 
 -(dispatch_group_t)authenticatorGroup;
 

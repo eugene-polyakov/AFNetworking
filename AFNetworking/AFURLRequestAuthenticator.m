@@ -10,8 +10,8 @@
 
 @implementation AFURLRequestAuthenticator
 
--(void)authenticateRequest:(NSMutableURLRequest*)request {
-    // do nothing
+-(BOOL)authenticateRequest:(NSMutableURLRequest*)request  {
+    return true;
 }
 
 -(dispatch_group_t)authenticatorGroup {

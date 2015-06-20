@@ -31,6 +31,8 @@
 // You can turn on ARC for only AFNetworking files by adding -fobjc-arc to the build phase for each of its files.
 #endif
 
+#import "mach/mach.h"
+
 typedef NS_ENUM(NSInteger, AFOperationState) {
     AFOperationPausedState      = -1,
     AFOperationReadyState       = 1,
@@ -442,21 +444,27 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
 }
 
 - (void)start {
+    //    NSLog(@"lock 1");
     [self.lock lock];
+    //    NSLog(@"lock 2");
     if ([self isCancelled]) {
         [self performSelector:@selector(cancelConnection) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
     } else if ([self isReady]) {
         self.state = AFOperationExecutingState;
-        void (^block)(void) = ^{
-            [self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
-        };
         if (self.requestAuthenticator.authenticatorGroup) {
-            dispatch_group_notify(self.requestAuthenticator.authenticatorGroup, dispatch_get_global_queue(0, 0), block);
+            dispatch_group_notify(self.requestAuthenticator.authenticatorGroup, dispatch_get_global_queue(0, 0), ^{
+                NSLog(@"Scheduler: Notify block starting: %@", self.request.URL.path);
+                [self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
+            });
+            NSLog(@"Scheduled: [%@] %@", self.request.URL.path, self.requestAuthenticator.authenticatorGroup);
         } else {
-            block();
+            NSLog(@"no group, starting operation: %@", self.request.URL.path);
+            [self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
         }
     }
+    //    NSLog(@"unlock 3");
     [self.lock unlock];
+    //    NSLog(@"unlock 4");
 }
 
 - (void)operationDidStart {
@@ -464,8 +472,14 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
     if (![self isCancelled]) {
         if (self.requestAuthenticator) {
             NSMutableURLRequest * req = self.request.mutableCopy;
-            [self.requestAuthenticator authenticateRequest:req];
-            self.request = req;
+            if ([self.requestAuthenticator authenticateRequest:req]) {
+                self.request = req;
+            } else {
+                NSError * error = [[NSError alloc] initWithDomain:@"Auth" code:-111 userInfo:@{NSLocalizedDescriptionKey: @"Authentication cancelled"}];
+                [self.connection cancel];
+                [self performSelector:@selector(connection:didFailWithError:) withObject:self.connection withObject:error];
+                return;
+            }
         }
         self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];
         
