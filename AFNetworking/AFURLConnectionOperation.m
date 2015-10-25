@@ -453,12 +453,12 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
         self.state = AFOperationExecutingState;
         if (self.requestAuthenticator.authenticatorGroup) {
             dispatch_group_notify(self.requestAuthenticator.authenticatorGroup, dispatch_get_global_queue(0, 0), ^{
-                NSLog(@"Scheduler: Notify block starting: %@", self.request.URL.path);
+//                NSLog(@"Scheduler: Notify block starting: %@", self.request.URL.path);
                 [self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
             });
-            NSLog(@"Scheduled: [%@] %@", self.request.URL.path, self.requestAuthenticator.authenticatorGroup);
+//            NSLog(@"Scheduled: [%@] %@", self.request.URL.path, self.requestAuthenticator.authenticatorGroup);
         } else {
-            NSLog(@"no group, starting operation: %@", self.request.URL.path);
+//            NSLog(@"no group, starting operation: %@", self.request.URL.path);
             [self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
         }
     }
